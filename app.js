@@ -5,16 +5,16 @@ var express = require('express')
 var bodyParser = require('body-parser')
     ,static = require('serve-static')
     ,cookieParser = require('cookie-parser')
-    ,errorHandler = require('errorHandler');
+    ,errorHandler = require('error-handler');
 
-var expressErrorHandler = require('express-error-handler;
+var expressErrorHandler = require('express-error-handler');
 
-var expressionSession = require('express-session');
+var expressSession = require('express-session');
 
 var multer = require('multer');
 var fs = require('fs');
 
-var cors = require('cors');
+var cors = require(cors);
 
 var app = express();
 
