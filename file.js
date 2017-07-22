@@ -124,7 +124,7 @@ router.route('/process/photo').post(upload.array('photo', 1), function(req, res)
         
         console.log('current file : ' +originalname + "," + filename + "," + mimetype + "," + size);
         
-        res.writeHead('200', {'Content-Type':'tappext/html;charset=utf8'});
+        res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
 		res.write('<h3>File sucessfully uploaded</h3>');
 		res.write('<hr/>');
 		res.write('<p>original file : ' + originalname + ' -> saved file ' + filename + '</p>');
