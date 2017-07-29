@@ -52,41 +52,41 @@ router.route('/process/login').post(function(req, res){
     
     if(pool) {
         authUser(paramId, paramPassword, function(err, rows){
-                    
-                    if(err){
-                        
-                        console.error('error found as processing login :' +err.stack);
-                        res.writeHead('200', {'Content-Type': 'text/html; charset=utf-8'});
-                        res.write('<p>' +err.stack +'</p>');
-                        res.end();
-                        return;
-                    }
-                    
-                    if(rows) {
-                    console.dir(rows);
+            
+            if(err){
+                 console.error('error found as processing login :' +err.stack);
+                res.writeHead('200', {'Content-Type': 'text/html; charset=utf-8'});
+                res.write('<p>' +err.stack +'</p>');
+                res.end();
+                
+                return;
+            }
+            
+            if(rows){
+                console.dir(rows);
 
-                    var name = rows[0].name;
+                var name = rows[0].name;
 
-                    res.writeHead('200', {'Content-Type': 'text/html; charset=utf-8'});
-                    res.write('<h1>Sucessfully logged in</h1>');
-                    res.write('<div><p>Param Id :' +paramId+ '</p></div>');
-                    res.write('<div><p>Param Password :' +username+ '</p></div>');
-                    res.write("<br><br><a href='/public/login.html'>Back to Login page</a>");
-                    res.end();
-                } else
-                    res.writeHead('200', {'Content-Type' : 'text/html; charset =utf-8'});
+                res.writeHead('200', {'Content-Type': 'text/html; charset=utf-8'});
+                res.write('<h1>Sucessfully logged in</h1>');
+                res.write('<div><p>Param Id :' +paramId+ '</p></div>');
+                res.write('<div><p>Param Password :' +name+ '</p></div>');
+                res.write("<br><br><a href='/public/login.html'>Back to Login page</a>");
+                res.end();
+            }else{
+                res.writeHead('200', {'Content-Type' : 'text/html; charset =utf-8'});
                     res.write('<h2>Failled to login in</h2>')
                     res.write('<div><p>Please check your ID/PW</p></div>');
                     res.write("<br><br><a href='/public/login.html'>Back to Login page</a>"); 
                     res.end();
-                });
-        }else {
+            }
+        }); 
+                 }else{
                     res.writeHead('200', {'Content-Type' : 'text/html; charset =utf-8'});
                     res.write('<h2>Failed connecting Database</h2>')
                     res.write("<div><p>Cannot connect to Database</p></div>");
                     res.end();
-    }
-
+                 }
 });
         
 router.route('/process/adduser').post(function(req, res){
@@ -241,6 +241,3 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 
 });
-
-
-
